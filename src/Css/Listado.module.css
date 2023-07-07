@@ -1,41 +1,85 @@
-.productList{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-auto-rows: 1fr;
-    grid-gap: 30px;
-    margin: 0 auto;
-    margin-top: 90px;
-    max-width: 1200px;
+.productList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+  grid-gap: 30px;
+  column-gap: 150px;
+  margin: 0 auto;
+  margin-top: 90px;
+  max-width: 1200px;
 }
-.productList button{
 
-    width: 150px;
-    border-radius: 15px;
-    background-color: rgb(13, 206, 13);
+@media (max-width: 767px) {
+  .productList {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }
-.card{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-color: rgb(51, 48, 48);
+  transition: all 300ms;
 }
+
+.card:hover {
+  border: 1px solid rgb(179, 18, 157);
+}
+
 .card img {
-    max-width: 100%;
-    height: 80%;
-    margin-bottom: 10px;
-  }
+  max-width: 100%;
+  height: 80%;
+  margin-bottom: 10px;
+}
 
-  .card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
 
-  .card p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 10px;
+.card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.card .price {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.card .price button {
+  color: white;
+  font-weight: bold;
+  margin: 5px;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: green;
+}
+
+.productList button {
+  color: white;
+  font-weight: bold;
+  width: 150px;
+  height: 60px;
+  border-radius: 15px;
+  line-height: 1px;
+  background-color: rgb(179, 18, 157);
+}
+
+
+@media (max-width: 767px) {
+  .card {
+    width: 100%;
   }
+}

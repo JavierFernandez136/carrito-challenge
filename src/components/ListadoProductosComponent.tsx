@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Style from '../Css/Listado.module.css';
 import { CartContext } from './CartContext';
-import {  ProductData } from '../types';
+import { ProductData } from '../types';
 
 const ListadoProductosComponent: React.FC = () => {
   const [productos, setProductos] = useState<ProductData[]>([]);
   const cartContext = useContext(CartContext);
-  const [gemas,setGemas]=useState(0)
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -27,27 +26,56 @@ const ListadoProductosComponent: React.FC = () => {
   }, []);
 
   const addToCart = (product: ProductData) => {
-    if( gemas < 3){
-      
     if (cartContext) {
+      const existingItem = cartContext.cartItems.find((item) => item.product.id === product.id);
+      if (existingItem) {
+        return;
+      }
+
+      const cartTotal = cartContext.cartItems.reduce((total, item) => total + item.product.precio * item.quantity, 0);
+      const hasEnoughGems = cartTotal + product.precio <= 3;
+      const isGemLimitReached = cartContext.cartItems.length === 3;
+
+      if (!hasEnoughGems || isGemLimitReached) {
+        return;
+      }
+
       cartContext.addToCart(product);
     }
-  setGemas(gemas+1);
-  } else(alert('solamente puedes agregar 3 pociones'))
   };
 
   return (
     <div className={Style.productList}>
-      {productos.map((product, index) => (
-        <div className={Style.card} key={index}>
-          <img src={product.imagen} alt={product.nombre} />
-          <h3>{product.nombre}</h3>
-          <p>Price: ${product.precio}</p>
-          <p>Category: {product.categoria}</p>
-          <p>Description: {product.descripcion}</p>
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
-        </div>
-      ))}
+      {productos.map((product: ProductData, index: number) => {
+        const isProductAdded = cartContext?.cartItems.some((item) => item.product.id === product.id);
+        const cartTotal = cartContext?.cartItems.reduce(
+          (total, item) => total + item.product.precio * item.quantity,
+          0
+        );
+        const hasEnoughGems = cartTotal !== undefined && cartTotal + product.precio <= 3;
+        const isGemLimitReached = cartContext?.cartItems.length === 3;
+
+        return (
+          <div className={`${Style.card} ${Style.product}`} key={index}>
+            <img src={product.imagen} alt={product.nombre} />
+            <h3>{product.nombre}</h3>
+            <div className={Style.price}>
+              <button className={Style.priceButton}>{product.precio} Gemas</button>
+            </div>
+            <p>{product.descripcion}</p>
+            <button
+              onClick={() => addToCart(product)}
+              className={`${Style.productButton} ${isProductAdded ? Style.addButtonDisabled : ''}`}
+              disabled={isProductAdded || !hasEnoughGems || isGemLimitReached}
+              style={{
+                backgroundColor: isProductAdded || !hasEnoughGems || isGemLimitReached ? 'gray' : '',
+              }}
+            >
+              Agregar
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 };
