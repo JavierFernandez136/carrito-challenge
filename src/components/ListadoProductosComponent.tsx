@@ -65,7 +65,7 @@ const ListadoProductosComponent: React.FC = () => {
             <p>{product.descripcion}</p>
             <button
               onClick={() => addToCart(product)}
-              className={`${Style.productButton} ${isProductAdded ? Style.addButtonDisabled : ''}`}
+              className={`${Style.productButton}`}
               disabled={isProductAdded || !hasEnoughGems || isGemLimitReached}
               style={{
                 backgroundColor: isProductAdded || !hasEnoughGems || isGemLimitReached ? 'gray' : '',

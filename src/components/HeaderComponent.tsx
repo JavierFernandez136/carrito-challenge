@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from './CartContext';
-import { CartItem } from '../types';
+import Style from '../Css/Listado.module.css';
+
 
 interface HeaderComponentProps {
   showCarrito: boolean;
@@ -18,9 +19,8 @@ export const HeaderComponent: React.FC<HeaderComponentProps> = ({ showCarrito, s
     <div className="bg-stone-700 py-4 px-8 flex justify-between items-center sticky top-0 shadow-md z-10">
       <h1 className="text-white text-2xl font-bold">🧙‍♂️ Potion Shop</h1>
       <div className="flex gap-2 items-center">
-        <img src="./gem.png" alt="Gemas" />
-        <span>{totalGemas} Gemas</span>
-      </div>
+      <img src="./gem.png" alt="Gemas" className={totalGemas > 0 ? "" : Style.grayscale} />
+        <span>{totalGemas} {totalGemas === 1 ? 'Gema' : 'Gemas'}</span>      </div>
       <button className="text-white hover:underline" onClick={() => setShowCarrito(true)}>
         Ver Carrito ({cartItems.length})
       </button>

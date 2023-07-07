@@ -14,7 +14,7 @@ function App() {
       >
         <HeaderComponent showCarrito={showCarrito} setShowCarrito={setShowCarrito}/>
         <div className="flex justify-center min-h-full">
-          <div className="max-w-lg w-full py-16">
+          <div className=" w-3/5 flex justify-between">
             {showCarrito ? <CarritoComponent showCarrito={showCarrito} setShowCarrito={setShowCarrito}/> : <ListadoProductosComponent />}
           </div>
         </div>
