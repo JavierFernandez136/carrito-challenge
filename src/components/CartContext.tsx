@@ -45,3 +45,4 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
 };
+//prueba
