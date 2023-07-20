@@ -3,8 +3,9 @@ import { CartProvider } from './components/CartContext';
 import { CarritoComponent } from './components/CarritoComponent';
 import { HeaderComponent } from './components/HeaderComponent';
 import ListadoProductosComponent from './components/ListadoProductosComponent';
-
+import json from './db.json'
 function App() {
+  console.log(json.productos);
   const [showCarrito, setShowCarrito] = useState<boolean>(false);
   return (
     <CartProvider>

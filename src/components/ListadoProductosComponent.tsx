@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Style from '../Css/Listado.module.css';
 import { CartContext } from './CartContext';
 import { ProductData } from '../types';
+import json from '../db.json';
 
 const ListadoProductosComponent: React.FC = () => {
   const [productos, setProductos] = useState<ProductData[]>([]);
@@ -9,17 +10,19 @@ const ListadoProductosComponent: React.FC = () => {
 
   useEffect(() => {
     const fetchProductos = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/productos');
-        if (response.ok) {
-          const data = await response.json();
-          setProductos(data);
-        } else {
-          console.log('Error al obtener los productos.');
-        }
-      } catch (error) {
-        console.log('Error de conexión.', error);
-      }
+      // try {
+        setProductos(json.productos)
+        // const response = json.productos 
+      //   await fetch('http://localhost:3001/productos');
+      //   if (response.ok) {
+      //     const data = await response.json();
+      //     setProductos(data);
+      //   } else {
+      //     console.log('Error al obtener los productos.');
+      //   }
+      // } catch (error) {
+      //   console.log('Error de conexión.', error);
+      // }
     };
 
     fetchProductos();
@@ -57,7 +60,7 @@ const ListadoProductosComponent: React.FC = () => {
 
         return (
           <div className={`${Style.card} ${Style.product}`} key={index}>
-            <img src={product.imagen} alt={product.nombre} />
+            { <img src={product.imagen} alt={product.nombre} /> }
             <h3>{product.nombre}</h3>
             <div className={Style.price}>
               <button className={Style.priceButton}>{product.precio} Gemas</button>
