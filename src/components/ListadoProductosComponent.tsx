@@ -60,7 +60,7 @@ const ListadoProductosComponent: React.FC = () => {
 
         return (
           <div className={`${Style.card} ${Style.product}`} key={index}>
-            { <img src={product.imagen} alt={product.nombre} /> }
+            { <img src={process.env.PUBLIC_URL + product.imagen} alt={product.nombre} /> }
             <h3>{product.nombre}</h3>
             <div className={Style.price}>
               <button className={Style.priceButton}>{product.precio} Gemas</button>
